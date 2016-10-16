@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/skeleton.min.css">
+    <style media="screen">
+        h1 {
+            color: #0A633D;
+        }
+
+        h3, thead, tbody, li {
+            color: #15CAB1;
+        }
+
+        select, input, p {
+            color: #FA9F29;
+            margin: 10, 0;
+        }
+
+        body {
+            background-color: #2F3030;
+        }
+    </style>
+
+    <title>Model_To_View_Binder</title>
+</head>
+
+<body>
+    <div class="container">
+
+
+        <h1>Inner html</h1>
+        <h3 inner="number">number(not modified)</h3>
+        <h3 inner="string">string(not modified)</h3>
+        <h3 inner="boolean">boolean(not modified)</h3>
+        <h3 inner="person.name">person.name(not modified)</h3>
+
+        <h1>Input text</h1>
+        <input type="text" bind-value="number" placeholder="number (not modified)">
+        <input type="text" bind-value="string" placeholder="string (not modified)">
+        <input type="text" bind-value="boolean" placeholder="boolean (not modified)">
+        <input type="text" bind-value="person.name" inner="person.name" placeholder="person.name (not modified)">
+
+        <h1>Select</h1>
+        <p>number</p>
+        <select bind-value='number'>
+            <option bind-value="10">10</option>
+            <option bind-value="20">20</option>
+            <option bind-value="30">30</option>
+        </select>
+        <p>string</p>
+        <select bind-value='string'>
+            <option bind-value="10">10</option>
+            <option bind-value="20">20</option>
+            <option bind-value="test">test</option>
+        </select>
+        <p>boolean</p>
+        <select bind-value='boolean'>
+            <option bind-value="false">false</option>
+            <option bind-value="true">true</option>
+        </select>
+        <p>array</p>
+        <select >
+            <!-- in tags with repeat directive, empty directives are infered to be bound to array items-->
+            <!-- for exemple the empty bind-value directive bellow means the value on this tag -->
+            <!-- will be set from an item in the array -->
+            <option repeat='numArray' bind-value inner>false</option>
+        </select>
+
+        <h1>Radio button and checkbox</h1>
+        <input type="radio" bind-value="boolean">
+        <input type="checkbox" bind-value="boolean">
+
+        <h1>Table</h1>
+        <table class="u-full-width">
+            <thead>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Job</th>
+            </thead>
+            <tbody>
+                <tr repeat="p in peopleArray">
+                    <td inner="p.name"> (not modified)</td>
+                    <td inner="p.age"> (not modified)</td>
+                    <td inner="p.job"> (not modified)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h1>List</h1>
+        <ul>
+          <li repeat="numArray" inner></li>
+        </ul>
+
+    </div>
+    <script type="text/javascript" src="js/modelViewBinder.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+</body>
+
+</html>
